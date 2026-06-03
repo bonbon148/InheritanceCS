@@ -18,12 +18,16 @@ namespace Academy
 			):base(lastName, firstName, age, speciality)
 		{
 			this.Experience = experience;
-			Console.WriteLine($"TConstructor:\t{GetHashCode()}");
+#if DEBUG
+			Console.WriteLine($"TConstructor:\t{GetHashCode()}"); 
+#endif
 		}
 
 		~Teacher()
 		{
-			Console.WriteLine($"TDestrucor:\t{GetHashCode()}");
+#if DEBUG
+			Console.WriteLine($"TDestrucor:\t{GetHashCode()}"); 
+#endif
 		}
 
 		public override string ToString()
