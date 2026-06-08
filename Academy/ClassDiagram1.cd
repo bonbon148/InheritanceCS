@@ -23,6 +23,12 @@
   </Class>
   <Class Name="Academy.AcademyMember">
     <Position X="3" Y="3.75" Width="1.5" />
+    <InheritanceLine Type="Academy.Human" FixedFromPoint="true">
+      <Path>
+        <Point X="3.75" Y="3.017" />
+        <Point X="3.75" Y="3.75" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
       <FileName>AcademyMember.cs</FileName>
