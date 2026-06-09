@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 using System.IO;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace Academy
 {
@@ -62,6 +63,8 @@ namespace Academy
 				Console.WriteLine(group[i]);
 			}
 
+			Directory.SetCurrentDirectory($"{Application.ExecutablePath}\\..\\..\\..");
+			Console.WriteLine(Directory.GetCurrentDirectory());
 			string filename = "group.csv";
 			StreamWriter writer = new StreamWriter(filename);
 			foreach (Human h in group)
