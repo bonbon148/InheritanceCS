@@ -16,6 +16,7 @@ namespace Academy
 {
 	internal class Streamer
 	{
+		//Single resposibility principle
 		public void Print(Human[] group)
 		{
 			for (int i = 0; i < group.Length; i++)
