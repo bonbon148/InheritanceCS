@@ -58,22 +58,31 @@ namespace Academy
 				new Graduate("Rosenberg", "Ken", 35, "Law", "Vice", 32, 25, "How to make money"),
 				new Teacher("Colonel", "Cortez", 50, "Weapons distribution", 25)
 			};
+			Print(group);
+			Save(group, "group.csv");
+			
+
+		}
+		static void Print(Human[] group)
+		{
 			for (int i = 0; i < group.Length; i++)
 			{
 				Console.WriteLine(group[i]);
 			}
-
+			Save(group, "group.csv");
+		}
+		static void Save(Human[] group, string filename)
+		{
 			Directory.SetCurrentDirectory($"{Application.ExecutablePath}\\..\\..\\..");
 			Console.WriteLine(Directory.GetCurrentDirectory());
-			string filename = "group.csv";
+			//string filename = "group.csv";
 			StreamWriter writer = new StreamWriter(filename);
 			foreach (Human h in group)
 			{
 				writer.WriteLine(h.ToFileString());
 			}
 			writer.Close();
-			Process.Start("notepad", filename);//CSV - Comma-Separated Values (Значение, разделенные запятыми);
-
+			Process.Start("notepad", filename);    //CSV - Comma-Separated Values (Значение, разделенные запятыми);
 		}
 
 	}
