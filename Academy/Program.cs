@@ -1,5 +1,6 @@
 ﻿//#define INHERITANCE_PART_1
 //#define INHERITANCE_PART_2
+//#define WRITE_TO_FILE
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,7 @@ namespace Academy
 			Console.WriteLine(graduate);
 #endif
 
+#if WRITE_TO_FILE
 			//1) Upcast:
 			Human[] group = new Human[]
 			{
@@ -59,8 +61,12 @@ namespace Academy
 				new Teacher("Colonel", "Cortez", 50, "Weapons distribution", 25)
 			};
 			Print(group);
-			Save(group, "group.csv");
-			
+			Save(group, "group.csv"); 
+#endif
+
+			Human[] group = Load("group.csv");
+			Print (group);
+
 
 		}
 		static void Print(Human[] group)
@@ -69,7 +75,7 @@ namespace Academy
 			{
 				Console.WriteLine(group[i]);
 			}
-			Save(group, "group.csv");
+			//Save(group, "group.csv");
 		}
 		static void Save(Human[] group, string filename)
 		{
@@ -84,6 +90,30 @@ namespace Academy
 			writer.Close();
 			Process.Start("notepad", filename);    //CSV - Comma-Separated Values (Значение, разделенные запятыми);
 		}
-
+		static Human[] Load(string filename)
+		{
+			List<Human> group = new List<Human>();
+			Directory.SetCurrentDirectory($"{Application.ExecutablePath}\\..\\..\\..");
+			StreamReader reader = new StreamReader(filename);
+			while(!reader.EndOfStream)
+			{
+				string record = reader.ReadLine();
+				Console.WriteLine(record);
+				group.Add(Factory(record.Split(':').First()).Init(record.Split(":,;".ToCharArray())));
+			}
+			reader.Close();
+			return group.ToArray();
+		}
+		static Human Factory(string type)
+		{
+			Human human = null;
+			switch(type)
+			{
+				case "Student": human = new Student("", "", 0, "", "", 0, 0); break;
+				case "Graduate": human = new Graduate("", "", 0, "", "", 0, 0, ""); break;
+				case "Teacher": human = new Teacher("", "", 0, "", 0); break;
+			}
+			return human;
+		}
 	}
 }
