@@ -39,6 +39,7 @@ namespace AbstractGeometry
 			//Console.WriteLine("Нужно нарисовать прямоугольник");
 			Pen pen = new Pen(Color, LineWidht);
 			e.Graphics.DrawRectangle(pen, StartX, StartY, (float)Width, (float)Height);
+			DrawDiagonal(e);
 		}
 		public void DrawDiagonal(PaintEventArgs e)
 		{
@@ -55,7 +56,6 @@ namespace AbstractGeometry
 			Console.WriteLine($"Ширина прямоугольнкиа: {Width}");
 			Console.WriteLine($"Высота прямоугльника: {Height}");
 			Console.WriteLine($"Диагональ: {GetDiagonal()}");
-			DrawDiagonal(e);
 			base.Info(e);
 		}
 	}

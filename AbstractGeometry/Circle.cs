@@ -44,9 +44,10 @@ namespace AbstractGeometry
 		{
 			Pen pen = new Pen(Color, LineWidht);
 			e.Graphics.DrawEllipse(pen, StartX, StartY, (float)Radius * 2, (float)Radius * 2);
+			DrawCenter(e);
 			DrawRadius(e);
 			DrawDiameter(e);
-			DrawCenter(e);
+			
 		}
 		void DrawCenter(PaintEventArgs e)
 		{
@@ -92,7 +93,6 @@ namespace AbstractGeometry
 		{
 			Console.WriteLine($"Радиус: {Radius}");
 			Console.WriteLine($"Диаметр: {GetDiameter()}");
-			DrawDiameter(e);
 			base.Info(e);
 		}
 	}
