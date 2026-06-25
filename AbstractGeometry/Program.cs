@@ -29,6 +29,12 @@ namespace AbstractGeometry
 
 			Rectangle rectangle = new Rectangle(500, 230, 150, 200, 5, Color.Red);
 			rectangle.Info(e);
+
+			Square square = new Square(200, 500, 220, 3, Color.AliceBlue);
+			square.Info(e);
+
+			Circle circle = new Circle(50, 700, 300, 3, Color.Yellow);
+			circle.Info(e);
 		}
 		[DllImport("kernel32.dll")]
 		public static extern IntPtr GetConsoleWindow();
@@ -36,3 +42,11 @@ namespace AbstractGeometry
 		public static extern IntPtr GetDC(IntPtr hWnd);
 	}
 }
+/*
+---------------------------------------------------- 
+I... - Interface;
+...able - способен, имеет такую возможность;
+I...able;
+IMoveable, IFlyable, ISortable....
+----------------------------------------------------
+ */
