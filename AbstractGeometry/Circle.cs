@@ -12,13 +12,17 @@ namespace AbstractGeometry
 	class Circle:Shape, IHaveDiameter
 	{
 		public double Radius {  get; set; }
+		int angle;
+		int opposite_angle;
 		public Circle
 			(
 				double radius,
 				int startX, int startY, int lineWidth, Color color
 			): base(startX, startY, lineWidth, color )
 		{
-			this.Radius = radius;	
+			this.Radius = radius;
+			angle = 30;
+			opposite_angle = angle + 180;
 		}
 		public override double GetArea()
 		{
@@ -28,6 +32,10 @@ namespace AbstractGeometry
 		{
 			return Math.PI * Radius * 2;
 		}
+		public Point GetCenter()
+		{
+			return new Point(StartX + (int)Radius, StartX + (int)Radius);
+		}
 		public double GetDiameter()
 		{
 			return 2 * Radius;
@@ -36,6 +44,20 @@ namespace AbstractGeometry
 		{
 			Pen pen = new Pen(Color, LineWidht);
 			e.Graphics.DrawEllipse(pen, StartX, StartY, (float)Radius * 2, (float)Radius * 2);
+			DrawRadius(e);
+			DrawDiameter(e);
+			DrawCenter(e);
+		}
+		void DrawCenter(PaintEventArgs e)
+		{
+			Point center = GetCenter();
+			Pen pen = new Pen(Color, 4);
+			e.Graphics.DrawEllipse
+				(
+				pen,
+				center.X-2, center.Y-2,
+				4, 4
+				);
 		}
 		public void DrawRadius(PaintEventArgs e)
 		{
@@ -44,8 +66,8 @@ namespace AbstractGeometry
 				(
 					pen,
 					StartX + (int)Radius, StartY + (int)Radius,
-					StartX + (int)Radius + (int)(Radius * Math.Cos(210*Math.PI/180)), 
-					StartY + (int)Radius + (int)(Radius * Math.Sin(210*Math.PI/180))
+					StartX + (int)Radius + (int)(Radius * Math.Cos(angle*Math.PI/180)), 
+					StartY + (int)Radius + (int)(Radius * Math.Sin(angle*Math.PI/180))
 				);
 
 
@@ -55,14 +77,15 @@ namespace AbstractGeometry
 		{
 			Pen pen = new Pen (Color, 1);
 			e.Graphics.DrawLine
+
 				(
 				pen, 
 				
-				StartX + (int)Radius + (int)(Radius * Math.Sin(210*Math.PI/180)),
-				StartY + (int)Radius + (float)(Radius * Math.Cos(210*Math.PI/180)),
+				StartX + (int)Radius + (int)(Radius * Math.Cos(opposite_angle*Math.PI/180)),
+				StartY + (int)Radius + (float)(Radius * Math.Sin(opposite_angle*Math.PI/180)),
 				
-				StartX + (int)Radius + (float)(Radius * Math.Sin(30*Math.PI/180)),
-				StartY + (int)Radius + (float)(Radius * Math.Cos(30*Math.PI/180))
+				StartX + (int)Radius + (float)(Radius * Math.Cos(angle*Math.PI/180)),
+				StartY + (int)Radius + (float)(Radius * Math.Sin(angle*Math.PI/180))
 				);
 		}
 		public override void Info(PaintEventArgs e)
